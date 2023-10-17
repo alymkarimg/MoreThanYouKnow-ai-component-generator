@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { ChatGPTMessage } from "../utils/OpenAIStream";
-import { FRAMEWORKS } from "../components/ExportSelection";
+import { FRAMEWORKS } from "./ExportSelection";
 
 export function removeCodeWrapping(str: string) {
     if (str.startsWith("```") && str.endsWith("```")) {
