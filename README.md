@@ -95,7 +95,7 @@ const handler = async (req: Request): Promise<Response> => {
 
 ## Who made this project
 
-My name is [Alym](https://uk.linkedin.com/in/alym-karim-43232b138) - an developer at heart , I enjoy building end-to-end systems that not only look amazing, but also have real meaning and impact.
+My name is [Alym](https://uk.linkedin.com/in/alym-karim-43232b138) - a developer at heart , I enjoy building end-to-end systems that not only look amazing, but also have real meaning and impact.
 
 Credit also goes to [Yuval](https://www.linkedin.com/in/yuval-suede/) for the Serverless functions and inspiration for the project.
 
