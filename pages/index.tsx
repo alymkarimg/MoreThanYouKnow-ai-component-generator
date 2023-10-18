@@ -61,6 +61,7 @@ const Home: NextPage = () => {
               </p>
             </div>
             <textarea
+              id="ai_input"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               rows={4}
