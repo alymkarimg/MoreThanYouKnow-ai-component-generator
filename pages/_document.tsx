@@ -8,7 +8,7 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"
-            content="AI component Generator by Yuval Suede"
+            content="AI component Generator by Alym Karim"
           />
           <meta property="og:site_name" content="ai2ui.co" />
           <meta

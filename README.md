@@ -95,12 +95,14 @@ const handler = async (req: Request): Promise<Response> => {
 
 ## Who made this project
 
-My name is [Yuval](https://www.linkedin.com/in/yuval-suede/) - an entrepreneur at heart , I ❤️ building end-to-end systems that not only look amazing and feel state-of-the-art, but also have real meaning and impact.
+My name is [Alym](https://uk.linkedin.com/in/alym-karim-43232b138) - an developer at heart , I enjoy building end-to-end systems that not only look amazing, but also have real meaning and impact.
+
+Credit also goes to [Yuval](https://www.linkedin.com/in/yuval-suede/) for the Serverless functions and inspiration for the project.
 
 ## 🤝 Contributing
 Contributions, issues and feature requests are welcome!<br />
 * Fork the repository, Clone it on your device. That's it 🎉
-* Finally make a pull request :)
+* Finally make a pull request
 
 ## 📝 License
 

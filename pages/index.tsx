@@ -36,7 +36,7 @@ const Home: NextPage = () => {
           {/* star on github */}
           <a
             className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-green-300 bg-white px-4 py-2 text-sm text-black shadow-md transition-colors hover:bg-white-100 mb-5 animate-wobble"
-            href="https://github.com/yuvalsuede/ai-component-generator"
+            href="https://github.com/alymkarimg/MoreThanYouKnow-ai-component-generator"
             target="_blank"
             rel="noopener noreferrer"
           >
