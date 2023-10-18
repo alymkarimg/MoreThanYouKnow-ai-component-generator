@@ -1,4 +1,3 @@
-import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
 import "../styles/animations.css";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -11,7 +10,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <GoogleAnalytics trackPageViews />
       <Component {...pageProps} />
-      <Analytics />
     </>
   );
 }
