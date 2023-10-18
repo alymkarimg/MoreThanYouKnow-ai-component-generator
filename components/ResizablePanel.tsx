@@ -3,10 +3,10 @@ import useMeasure from "react-use-measure";
 
 export default function ResizablePanel({
   children,
-  className
+  className,
 }: {
   children: React.ReactNode;
-  className: string
+  className: string;
 }) {
   let [ref, { height }] = useMeasure();
 

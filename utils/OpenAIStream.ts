@@ -1,5 +1,5 @@
 export type ChatGPTMessage = {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
 };
 
@@ -22,9 +22,8 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
 
   try {
     if (stream.error) return stream.error.message;
-    return stream?.choices[0]?.message?.content || ''
-
+    return stream?.choices[0]?.message?.content || "";
   } catch (e) {
-      return e
+    return e;
   }
 }

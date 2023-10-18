@@ -1,32 +1,37 @@
-import {ChatGPTMessage, OpenAIStream, OpenAIStreamPayload} from "../../utils/OpenAIStream";
+import {
+  ChatGPTMessage,
+  OpenAIStream,
+  OpenAIStreamPayload,
+} from "../../utils/OpenAIStream";
 
 if (!process.env.OPENAI_API_KEY) {
-    throw new Error("Missing env var from OpenAI");
+  throw new Error("Missing env var from OpenAI");
 }
 
 export const config = {
-    runtime: "edge",
+  runtime: "edge",
 };
 
-
 const handler = async (req: Request): Promise<Response> => {
-    const {messages} = (await req.json()) as {
-        messages?: ChatGPTMessage[];
-    };
+  const { messages } = (await req.json()) as {
+    messages?: ChatGPTMessage[];
+  };
 
-    if (!messages) {
-        return new Response("No prompt in the request", {status: 400});
-    }
+  if (!messages) {
+    return new Response("No prompt in the request", { status: 400 });
+  }
 
-    const payload: OpenAIStreamPayload = {
-        model: "gpt-3.5-turbo",
-        messages: [
-            {
-                "role": "user",
-                "content": "create next.js + tailwind css code for button 200 x 100, light purple background, generate text on it. Please create a complete next.js component"
-            },
-            {
-                "role": "assistant", "content": `
+  const payload: OpenAIStreamPayload = {
+    model: "gpt-3.5-turbo",
+    messages: [
+      {
+        role: "user",
+        content:
+          "create next.js + tailwind css code for button 200 x 100, light purple background, generate text on it. Please create a complete next.js component",
+      },
+      {
+        role: "assistant",
+        content: `
                     import React from 'react';
                     const MyComponent = () => {
                       return (
@@ -38,19 +43,20 @@ const handler = async (req: Request): Promise<Response> => {
                       );
                     };
                     export default MyComponent;
-                `
-            },
-            {
-                "role": "user",
-                "content": "Please create html code with inline css that creates the following component, Material UI look and feel, return only code"
-            },
-            {"role": "user", "content": "DO NOT wrap the returned code with ```"},
-            ...messages
-        ],
-    };
+                `,
+      },
+      {
+        role: "user",
+        content:
+          "Please create html code with inline css that creates the following component, Material UI look and feel, return only code",
+      },
+      { role: "user", content: "DO NOT wrap the returned code with ```" },
+      ...messages,
+    ],
+  };
 
-    const stream = await OpenAIStream(payload);
-    return new Response(stream);
+  const stream = await OpenAIStream(payload);
+  return new Response(stream);
 };
 
 export default handler;
