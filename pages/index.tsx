@@ -28,7 +28,7 @@ const Home: NextPage = () => {
             <Header />
 
             <main className="grid grid-cols-1 md:grid-cols-2 gap-3 container mx-auto px-4">
-                <div className="flex flex-col my-10">
+                <div className="flex flex-col my-3 md:my-10">
                 {/* star on github */}
                 <a
                     className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-green-300 bg-white px-4 py-2 text-sm text-black shadow-md transition-colors hover:bg-white-100 mb-5 animate-wobble"
@@ -104,9 +104,9 @@ const Home: NextPage = () => {
                     toastOptions={{ duration: 2000 }}
                 />
                 </div>
-                <ResizablePanel>
+                <ResizablePanel className={`${!isLoading && !generatedCode? 'hidden md:block' : ''}`}>
                     <AnimatePresence mode="wait">
-                        <motion.div className="space-y-10 my-10">
+                        <motion.div className="space-y-10 my-3 md:my-10">
                             {generatedCode && (
                                 <>
                                     <div>

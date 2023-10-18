@@ -3,8 +3,10 @@ import useMeasure from "react-use-measure";
 
 export default function ResizablePanel({
   children,
+  className
 }: {
   children: React.ReactNode;
+  className: string
 }) {
   let [ref, { height }] = useMeasure();
 
@@ -12,7 +14,7 @@ export default function ResizablePanel({
     <motion.div
       animate={height ? { height } : {}}
       style={height ? { height } : {}}
-      className="relative w-full overflow-hidden"
+      className={`relative w-full overflow-hidden ${className}`}
       transition={{ type: "tween", duration: 0.5 }}
     >
       <div ref={ref} className={height ? "absolute inset-x-0" : "relative"}>
