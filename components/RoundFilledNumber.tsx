@@ -2,7 +2,7 @@ import React from "react";
 
 interface RoundFilledNumberProps {
     number: number;
-    mt?: number;
+    mt?: boolean;
 }
 
 const RoundFilledNumber: React.FC<RoundFilledNumberProps> = ({ number, mt }) => {
