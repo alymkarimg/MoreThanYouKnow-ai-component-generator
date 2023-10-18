@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { ChatGPTMessage } from "../utils/OpenAIStream";
-import { FRAMEWORKS } from "./ExportSelection";
 
 export function removeCodeWrapping(str: string) {
     if (str.startsWith("```") && str.endsWith("```")) {
@@ -15,7 +14,6 @@ export function useChatGPT(clear: () => void) {
     const [conversation, setConversation] = useState<ChatGPTMessage[]>([]);
     const [generatedCode, setGeneratedCode] = useState("");
     const [exportedGeneratedCode, setExportedGeneratedCode] = useState<any>("");
-    const [selectedExport, setSelectedExport] = useState<any>("html");
 
     function makeMessage(role: 'user' | 'assistant', content: string): ChatGPTMessage {
         return {
@@ -54,13 +52,8 @@ export function useChatGPT(clear: () => void) {
         setConversation(sofar => [...sofar, reply]);
 
         const code = removeCodeWrapping(rawValue);
-        const selectedFrameworkName = FRAMEWORKS.find(framework => framework.value === selectedExport) || 'html';
+        const selectedFrameworkName = 'next-tailwind';
 
-        if (selectedFrameworkName === 'html') {
-            // simple usecase
-            setExportedGeneratedCode(code);
-        
-        } else {
             // handle all other export frameworks
             const translatedCode = await fetch("/api/export-code", {
                 method: "POST",
@@ -91,7 +84,7 @@ export function useChatGPT(clear: () => void) {
             const newCode = decoderData.decode(translatedCodeValue)
         
             setExportedGeneratedCode(newCode);
-        }
+
         setGeneratedCode(code);
         clear();
         setLoading(false);
@@ -104,6 +97,6 @@ export function useChatGPT(clear: () => void) {
         clear();
     }, []);
 
-    return { exportedGeneratedCode, isLoading, generateUI, generatedCode, restart, setSelectedExport };
+    return { exportedGeneratedCode, isLoading, generateUI, generatedCode, restart };
 
 }

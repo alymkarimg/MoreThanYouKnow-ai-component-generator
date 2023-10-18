@@ -31,7 +31,7 @@ class MyDocument extends Document {
             content="https://ai2ui.co/og-image-3.png"
           />
         </Head>
-        <body>
+        <body className="bg-black text-white">
           <Main />
           <NextScript />
         </body>
