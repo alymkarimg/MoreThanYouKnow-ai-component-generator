@@ -14,6 +14,7 @@ import Skeleton from "react-loading-skeleton";
 
 const Home: NextPage = () => {
   const [prompt, setPrompt] = useState("");
+  // get the state from useChatGPT function
   const {
     exportedGeneratedCode,
     isLoading,
