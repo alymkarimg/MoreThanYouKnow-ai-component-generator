@@ -1,5 +1,4 @@
 import {
-  ChatGPTMessage,
   OpenAIStream,
   OpenAIStreamPayload,
 } from "../../utils/OpenAIStream";
