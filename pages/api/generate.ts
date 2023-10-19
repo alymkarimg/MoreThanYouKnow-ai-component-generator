@@ -27,7 +27,7 @@ const handler = async (req: Request): Promise<Response> => {
       {
         role: "user",
         content:
-          "create next.js + tailwind css code for button 200 x 100, light purple background, generate text on it. Please create a complete next.js component",
+          "create next.js code with inline styles for a button 200 x 100, light purple background, generate text on it. Please create a complete next.js component",
       },
       {
         role: "assistant",
@@ -35,10 +35,10 @@ const handler = async (req: Request): Promise<Response> => {
                     import React from 'react';
                     const MyComponent = () => {
                       return (
-                        <div className="flex flex-col items-center justify-center h-screen">
-                          <h1 className="text-3xl font-bold mb-4">Hello World</h1>
-                          <p className="text-lg mb-4">Welcome to my Next.js component using Tailwind CSS</p>
-                          <button className="bg-purple-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">Click Me</button>
+                        <div style={{ "display": "flex", "flexDirection": "column", "placeItems": "center", "height": "100vh" }}>
+                          <h1 style={{ "fontSize": "1.9rem", "lineHeight": "2.3rem", "fontWeight": "bold", "marginBottom": "1rem" }}>Hello World</h1>
+                          <p style={{ "fontSize": "1.13rem", "lineHeight": "1.8rem", "marginBottom": "1rem" }}>Welcome to my Next.js component using Tailwind CSS</p>
+                          <button style={{ "backgroundColor": "purple", "color": "white", "paddingInline": "1rem", "paddingBlock": "0.5rem" }}>Click Me</button>
                         </div>
                       );
                     };
@@ -51,6 +51,7 @@ const handler = async (req: Request): Promise<Response> => {
           "Please create html code with inline css that creates the following component, Material UI look and feel, return only code",
       },
       { role: "user", content: "DO NOT wrap the returned code with ```" },
+      { role: "user", content: "DO NOT start the returned code with 'html' "},
       ...messages,
     ],
   };

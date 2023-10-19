@@ -29,7 +29,10 @@ export function useChatGPT(clear: () => void) {
     async (prompt: string) => {
       setLoading(true);
       const request = makeMessage("user", prompt);
-      setConversation((sofar) => [...sofar, request]);
+      setConversation((sofar) => {
+        const value  = [...sofar, request]
+        return value
+      });
 
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -37,7 +40,7 @@ export function useChatGPT(clear: () => void) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          messages: [...conversation, request],
+          messages: conversation,
         }),
       });
 
@@ -56,40 +59,68 @@ export function useChatGPT(clear: () => void) {
       setConversation((sofar) => [...sofar, reply]);
 
       const code = removeCodeWrapping(rawValue);
-      const selectedFrameworkName = "next-tailwind";
 
-      // handle all other export frameworks
-      const translatedCode = await fetch("/api/export-code", {
+      const response2 = await fetch("/api/modify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prompt: code,
-          framework: selectedFrameworkName,
+          code,
         }),
       });
 
-      console.log("Edge function returned.");
-
-      if (!translatedCode.ok) {
-        throw new Error(translatedCode.statusText);
+      if (!response2.ok) {
+        throw new Error(response2.statusText);
       }
 
       // This data is a ReadableStream
-      const translatedCodeData = translatedCode.body;
-      if (!translatedCodeData) {
+      const data2 = response2.body;
+      if (!data2) {
         return;
       }
 
-      const readerData = translatedCodeData.getReader();
-      const decoderData = new TextDecoder();
-      const { value: translatedCodeValue } = await readerData.read();
-      const newCode = decoderData.decode(translatedCodeValue);
+      const rawValue2 = await response2.text();
+      const reply2 = makeMessage("assistant", rawValue2);
+      setConversation((sofar) => [...sofar, reply2]);
 
-      setExportedGeneratedCode(newCode);
+      const code2 = removeCodeWrapping(rawValue);
 
-      setGeneratedCode(code);
+      setExportedGeneratedCode(code2)
+
+      // const selectedFrameworkName = "next-tailwind";
+      // // handle all other export frameworks
+      // const translatedCode = await fetch("/api/export-code", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     prompt: code,
+      //     framework: selectedFrameworkName,
+      //   }),
+      // });
+
+      // console.log("Edge function returned.");
+
+      // if (!translatedCode.ok) {
+      //   throw new Error(translatedCode.statusText);
+      // }
+
+      // // This data is a ReadableStream
+      // const translatedCodeData = translatedCode.body;
+      // if (!translatedCodeData) {
+      //   return;
+      // }
+
+      // const readerData = translatedCodeData.getReader();
+      // const decoderData = new TextDecoder();
+      // const { value: translatedCodeValue } = await readerData.read();
+      // const newCode = decoderData.decode(translatedCodeValue);
+
+      // setExportedGeneratedCode(newCode);
+
+      setGeneratedCode(code2);
       clear();
       setLoading(false);
     },
